@@ -4,22 +4,19 @@ const cors = require('cors');
 const mysql = require("mysql");
 const mongoose = require("mongoose");
 const gameRoutes = require('./routes/game');
-
-require("dotenv").config;
-
+require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
 //usamos una constante para el puerto de conexion en caso de que este en modo de produccion (Heroku)y obtenga el puerto del mismo servidor 
-//o en caso de que este en modo de desarrollo usamos nuestro propio puerto (nodemon)
-
+//o en caso de que este en modo de desarrollo usamos nuestro propio puerto (nodemon
 
 //Middleware
 app.use('/mongo', gameRoutes)
 
 const db = mysql.createPool({
     host: "us-cdbr-east-05.cleardb.net",
-    user: "ba1c8e83e0cefe",
-    password: "b83b77e8",
+    user:  process.env.USER,
+    password:  process.env.PASSWORD,
     database: "heroku_e2d6adb49bc0a8d"
 })
 
@@ -34,7 +31,7 @@ app.use(express.urlencoded({
 }))
 
 //Mongoose init
-mongoose.connect("mongodb+srv://kreytos2001:cesar2001@bddistribuidas.7vkos.mongodb.net/videogames?retryWrites=true&w=majority").then(() =>{
+mongoose.connect(process.env.MONGODB).then(() =>{
     console.log("Conectado a mongo Atlas");
 }).catch((err) => {
     console.error(err);

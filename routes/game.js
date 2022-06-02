@@ -13,9 +13,11 @@ router.get("/get", (req, res) => {
 router.get("/get/:platform", (req, res) => {
   let { platform } = req.params;
   platform = getPlatform(platform);
+
   const filter = {
     platform: platform,
   };
+
   gameSchema
     .find(filter)
     .then((data) => res.json(data))
@@ -25,9 +27,11 @@ router.get("/get/:platform", (req, res) => {
 router.get("/get/count/:platform", (req, res) => {
   let { platform } = req.params;
   platform = getPlatform(platform);
+
   const filter = {
     platform: platform,
   };
+
   gameSchema
     .find(filter)
     .count()
@@ -41,34 +45,30 @@ router.get("/get/count/:platform", (req, res) => {
 });
 
 router.get("/get/date/count", (req, res) => {
-
   let result = [];
-  
+
   dates.map((item) => {
     let filter = {
-        year: {
-          $eq: item,
-        },
-      };
-    result.push(gameSchema
-      .find(filter)
-      .count())
-      
+      year: {
+        $eq: item,
+      },
+    };
+    result.push(gameSchema.find(filter).count());
   });
+  
   Promise.all(result).then((data) => {
     let countDate = [];
     let aux2 = 0;
     data.map((item) => {
-        let aux = {
-            "Date": dates[aux2],
-            "Cuantity": item
-        }
-        countDate.push(aux);
-        aux2++;
-    })
+      let aux = {
+        Date: dates[aux2],
+        Cuantity: item,
+      };
+      countDate.push(aux);
+      aux2++;
+    });
     res.json(countDate);
-  })
-  
+  });
 });
 
 function getPlatform(platform) {
@@ -121,7 +121,7 @@ function getPlatform(platform) {
 let dates = [
   1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,
   2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,
-  2021
+  2021,
 ];
 
 module.exports = router;
