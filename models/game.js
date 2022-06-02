@@ -9,7 +9,15 @@ const gameSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    release_date:{
+    year:{
+        type: Number,
+        required: true
+    },
+    month:{
+        type: String,
+        required: true
+    },
+    day:{
         type: String,
         required: true
     },
@@ -27,4 +35,5 @@ const gameSchema = mongoose.Schema({
     },
 });
 
+//En name va el nombre dela coleccion de la base de datos
 module.exports = mongoose.model('videogames', gameSchema);
