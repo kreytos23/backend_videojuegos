@@ -28,7 +28,7 @@ app.use(
 
 //Mongoose init
 mongoose
-  .connect(process.env.MONGODB)
+  .connect("mongodb+srv://kreytos2001:cesar2001@bddistribuidas.7vkos.mongodb.net/videogames?retryWrites=true&w=majority")
   .then(() => {
     console.log("Conectado a mongo Atlas");
   })
