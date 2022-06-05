@@ -26,7 +26,7 @@ const gameSchema = mongoose.Schema({
         required: true
     },
     meta_score:{
-        type: String,
+        type: Number,
         required: true
     },
     user_review:{
