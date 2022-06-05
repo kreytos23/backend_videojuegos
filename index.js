@@ -15,8 +15,8 @@ app.use('/mongo', gameRoutes)
 
 const db = mysql.createPool({
     host: "us-cdbr-east-05.cleardb.net",
-    user:  process.env.USER,
-    password:  process.env.PASSWORD,
+    user:  "ba1c8e83e0cefe",
+    password: "b83b77e8",
     database: "heroku_e2d6adb49bc0a8d"
 })
 
@@ -85,7 +85,7 @@ app.get("/mysql/best", (req, res) =>{
     })
 })
 
-app.get("/mysql/best/:platform", (req, res) =>{
+app.get("/mysql/best/platform/:platform", (req, res) =>{
     let { platform } = req.params;
     platform = getPlatform(platform);
 
@@ -95,7 +95,7 @@ app.get("/mysql/best/:platform", (req, res) =>{
     })
 })
 
-app.get("/mysql/worst/:platform", (req, res) =>{
+app.get("/mysql/worst/platform/:platform", (req, res) =>{
     let { platform } = req.params;
     platform = getPlatform(platform);
 
