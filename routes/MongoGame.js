@@ -202,6 +202,7 @@ router.get("/worst/year/:year", (req, res) => {
     .catch((err) => res.json({ message: err }));
 });
 
+//Utilidad
 function getPlatform(platform) {
   switch (platform) {
     case "playstation4":
