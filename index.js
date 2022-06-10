@@ -13,9 +13,7 @@ app.use("/mongo", gameRoutes);
 app.use("/mysql", mysqlRoutes);
 
 app.use(
-  cors({
-    credentials: true,
-  })
+  cors()
 );
 
 app.use(express.json());
