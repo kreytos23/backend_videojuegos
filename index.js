@@ -12,7 +12,14 @@ const PORT = process.env.PORT || 3001;
 app.use("/mongo", gameRoutes);
 app.use("/mysql", mysqlRoutes);
 
-//app.use();
+
+let corsOptions = {
+  origin: '*'
+}
+
+app.use(
+  cors(corsOptions)
+);
 
 app.use(express.json());
 
