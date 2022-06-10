@@ -14,7 +14,7 @@ app.use("/mysql", mysqlRoutes);
 
 
 let corsOptions = {
-  origin: '*'
+  origin: 'https://front-videojuegos.vercel.app'
 }
 
 app.use(
