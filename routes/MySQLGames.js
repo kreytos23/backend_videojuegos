@@ -1,54 +1,55 @@
 const express = require("express");
 const db = require("../connections/MySQLPool");
 const router = express.Router();
+const cors = require("cors");
 
 router.get("/hello", (req, res) => {
   res.send("Hello World in express");
 });
 
-router.get("/count/year", (req, res) => {
+router.get("/count/year",cors(), (req, res) => {
   const sql = "select * FROM getCountGamesGroupByYear";
   db.query(sql, (err, result) => {
     res.send(result);
   });
 });
 
-router.get("/count/platform", (req, res) => {
+router.get("/count/platform",cors(), (req, res) => {
   const sql = "select * FROM getGamesByPlatform";
   db.query(sql, (err, result) => {
     res.send(result);
   });
 });
 
-router.get("/count/metascore", (req, res) => {
+router.get("/count/metascore",cors(), (req, res) => {
   const sql = "SELECT * FROM getgamesbyscore";
   db.query(sql, (err, result) => {
     res.send(result);
   });
 });
 
-router.get("/count/userscore", (req, res) => {
+router.get("/count/userscore",cors(), (req, res) => {
   const sql = "SELECT * FROM getgamesbyscoreuser";
   db.query(sql, (err, result) => {
     res.send(result);
   });
 });
 
-router.get("/worst", (req, res) => {
+router.get("/worst",cors(), (req, res) => {
   const sql = "SELECT * FROM get10worstgamesbymetascore";
   db.query(sql, (err, result) => {
     res.send(result);
   });
 });
 
-router.get("/best", (req, res) => {
+router.get("/best",cors(), (req, res) => {
   const sql = "SELECT * FROM get10bestgamesbymetascore";
   db.query(sql, (err, result) => {
     res.send(result);
   });
 });
 
-router.get("/best/platform/:platform", (req, res) => {
+router.get("/best/platform/:platform",cors(), (req, res) => {
   let { platform } = req.params;
   platform = getPlatform(platform);
 
@@ -58,7 +59,7 @@ router.get("/best/platform/:platform", (req, res) => {
   });
 });
 
-router.get("/worst/platform/:platform", (req, res) => {
+router.get("/worst/platform/:platform",cors(), (req, res) => {
   let { platform } = req.params;
   platform = getPlatform(platform);
 
@@ -68,7 +69,7 @@ router.get("/worst/platform/:platform", (req, res) => {
   });
 });
 
-router.get("/best/year/:year", (req, res) => {
+router.get("/best/year/:year",cors(), (req, res) => {
   let { year } = req.params;
 
   const sql = `CALL get10bestgamesbymetascoreandyear('${year}')`;
@@ -77,7 +78,7 @@ router.get("/best/year/:year", (req, res) => {
   });
 });
 
-router.get("/worst/year/:year", (req, res) => {
+router.get("/worst/year/:year",cors(), (req, res) => {
   let { year } = req.params;
 
   const sql = `CALL get10worstgamesbymetascoreandyear('${year}')`;

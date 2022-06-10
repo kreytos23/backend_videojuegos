@@ -1,10 +1,11 @@
 const express = require("express");
 const gameSchema = require("../models/game");
+const cors = require("cors");
 
 const router = express.Router();
 
 //Query de control
-router.get("/get", (req, res) => {
+router.get("/get",cors(), (req, res) => {
   gameSchema
     .find()
     .then((data) => res.json(data[0]))
@@ -12,7 +13,7 @@ router.get("/get", (req, res) => {
 });
 
 //Query de control
-router.get("/get/:platform", (req, res) => {
+router.get("/get/:platform",cors(), (req, res) => {
   let { platform } = req.params;
   platform = getPlatform(platform);
 
@@ -26,7 +27,7 @@ router.get("/get/:platform", (req, res) => {
     .catch((err) => res.json({ message: err }));
 });
 
-router.get("/count/platform", (req, res) => {
+router.get("/count/platform",cors(), (req, res) => {
   let result = [];
 
   platforms.map((item) => {
@@ -53,7 +54,7 @@ router.get("/count/platform", (req, res) => {
   });
 });
 
-router.get("/count/year", (req, res) => {
+router.get("/count/year",cors(), (req, res) => {
   let result = [];
 
   dates.map((item) => {
@@ -80,7 +81,7 @@ router.get("/count/year", (req, res) => {
   });
 });
 
-router.get("/count/metascore", (req, res) => {
+router.get("/count/metascore",cors(), (req, res) => {
   let result = [];
 
   for (let index = 99; index >= 20; index--) {
@@ -107,7 +108,7 @@ router.get("/count/metascore", (req, res) => {
   });
 });
 
-router.get("/count/userscore", (req, res) => {
+router.get("/count/userscore", cors(),(req, res) => {
   let result = [];
 
   score.map((item) => {
@@ -134,21 +135,21 @@ router.get("/count/userscore", (req, res) => {
   });
 });
 
-router.get("/worst", (req, res) => {
+router.get("/worst", cors(),(req, res) => {
   gameSchema
     .find().sort({meta_score: 1}).limit(10)
     .then((data) => res.json(data))
     .catch((err) => res.json({ message: err }));
 });
 
-router.get("/best", (req, res) => {
+router.get("/best",cors(), (req, res) => {
   gameSchema
     .find().sort({meta_score: -1}).limit(10)
     .then((data) => res.json(data))
     .catch((err) => res.json({ message: err }));
 });
 
-router.get("/best/platform/:platform", (req, res) => {
+router.get("/best/platform/:platform",cors(), (req, res) => {
   let { platform } = req.params;
     platform = getPlatform(platform);
 
@@ -162,7 +163,7 @@ router.get("/best/platform/:platform", (req, res) => {
     .catch((err) => res.json({ message: err }));
 });
 
-router.get("/worst/platform/:platform", (req, res) => {
+router.get("/worst/platform/:platform",cors(), (req, res) => {
   let { platform } = req.params;
     platform = getPlatform(platform);
 
@@ -176,7 +177,7 @@ router.get("/worst/platform/:platform", (req, res) => {
     .catch((err) => res.json({ message: err }));
 });
 
-router.get("/best/year/:year", (req, res) => {
+router.get("/best/year/:year",cors(), (req, res) => {
   let { year } = req.params;
 
   let filter = {
@@ -189,7 +190,7 @@ router.get("/best/year/:year", (req, res) => {
     .catch((err) => res.json({ message: err }));
 });
 
-router.get("/worst/year/:year", (req, res) => {
+router.get("/worst/year/:year",cors(), (req, res) => {
   let { year } = req.params;
 
   let filter = {
